@@ -16,14 +16,29 @@ function App() {
 
   const [endTime, handleEndTime] = useState(current);
 
-  const [qty, handleQty] = useState(0);
+  const [qty, handleQty] = useState(1);
 
-  const [input, handleInput] = useState('');
+//   const [input, handleInput] = useState('');
 
   const [message, setMessage] = useState('');
 
   const [timeMsg, setTimeMsg] = useState('');
 
+  const handleChange = event => {
+    // setMessage(event.target.value);
+    var num = parseFloat(event.target.value);
+
+    console.log('value is:', num);
+    
+    if(!isNaN(num)){
+        if (num < 0){
+            setMessage('Please enter a valid number.');
+        } else {
+            handleQty(parseFloat(num));
+            setMessage('');
+        }
+    }
+  };
 //3
 const subtractTime = (start, end) => {
     var startHours = start.getHours();
@@ -43,7 +58,7 @@ const subtractTime = (start, end) => {
         subtract = subtract - 30;
     } 
     
-    if(startHours < 15){
+    if(startHours < 15 && startHours > 14){
         console.log('subtract 3 15');
         subtract = subtract - 15;
     }
@@ -110,10 +125,10 @@ const calcTimeDiff = (start, end) => {
 }
 //1
  const handleTimeDiff = (e) => {
-    handleInput(prev => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-    }));
+    // handleInput(prev => ({
+    //     ...prev,
+    //     [e.target.name]: e.target.value,
+    // }));
     // console.log(startTime, endTime)
     // console.log(input)
     console.log(startTime.getHours())
@@ -123,14 +138,6 @@ const calcTimeDiff = (start, end) => {
 
 
     // setMessage('Yes');
-
-    if(!isNaN(parseInt(+input))){
-        console.log('Input accepted')
-        handleQty(parseInt(input, 10))
-    } else {
-        setMessage('Please enter a number.');
-    }
-
 
 
 //    const totalWorkTime = endTime - startTime;
@@ -206,7 +213,7 @@ const calcTimeDiff = (start, end) => {
                             />  
                         </div>
                         <div className='input-group mb-3'>
-                        <label name="qty" id='quantity'>Quantity: </label> <input type="text" onInput={(e) => handleTimeDiff(e)}/> 
+                        <label name="qty" id='quantity'>Quantity: </label> <input type="number" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
                         </div>
                     </Form.Label>
                         
@@ -235,7 +242,7 @@ const calcTimeDiff = (start, end) => {
                             </tr>
                             <tr>
                                 <th>
-                                    Hours: {timeMsg}
+                                    Time: {timeMsg}
                                 </th>
                             </tr>
                             </tbody>
