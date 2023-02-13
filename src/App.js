@@ -1,7 +1,5 @@
 import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
-// import TimePicker from 'react-bootstrap-time-picker';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import { Card, Form, Button, Container} from 'react-bootstrap'
@@ -9,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  // const totalWorkTime = useState();
   
   const current = new Date();
+
   const [startTime, handleStartTime] = useState(current);
 
   const [endTime, handleEndTime] = useState(current);
@@ -20,15 +18,12 @@ function App() {
 
   const [qtyPerHour, handleQtyPerHour] = useState(0);
 
-//   const [input, handleInput] = useState('');
-
   const [message, setMessage] = useState('');
 
   const [timeMsg, setTimeMsg] = useState('');
 
   const handleChange = event => {
     var num = parseFloat(event.target.value);
-    // console.log('value is:', num);
     
     if(!isNaN(num)){
         if (num < 0){
@@ -39,7 +34,7 @@ function App() {
         }
     }
   };
-//3
+//3 returns -amount of mins, parameter of current time
 const subtractTime = (start, end) => {
     var startHours = start.getHours();
     var startMinutes = start.getMinutes();
@@ -47,13 +42,8 @@ const subtractTime = (start, end) => {
     var endMinutes = end.getMinutes();
     var totalStartMinutes = (startHours * 60) + startMinutes;
     var totalEndMinutes = (endHours * 60) + endMinutes;
-    
-    // console.log(totalStartMinutes + ' start');
-    // console.log(totalEndMinutes + ' end');
-
 
     setTimeMsg('From ' + startHours + ':' + startMinutes + ' to ' + endHours + ':' + endMinutes)
-    //if statement for extra zero if single digit minute for both
 
     var subtract = 0;
 
@@ -78,14 +68,12 @@ const subtractTime = (start, end) => {
     
 
     console.log(subtract);
-    //if 60 mins, subtract hour
     if (subtract === 60){
         return 1;
     } else {
         return subtract;
     }
 }
-//returns -amount of mins, parameter of time current
 
 //divides qty by hours worked
 const divideByQuantity = (hours, mins) => {
@@ -97,7 +85,6 @@ const divideByQuantity = (hours, mins) => {
 }
 //displays time
 const displayTime = (hours, mins) => {
-    //divide here, set qty/hour
     divideByQuantity(hours, mins);
     var displayHours = hours + ' Hours and ' + mins + ' minutes';
 
@@ -126,8 +113,9 @@ const calcTimeDiff = (start, end) => {
         calcMin = 60 + calcMin;
         hourDiff--;
         if(hourDiff < 0){
-            console.log('Invalid time frame.');
             //TODO: edit message for invalid time frame
+            setMessage('Invalid time frame.');
+            return;
         }
         console.log(hourDiff + ' hrs-');
     } else if (endMinutes >= startMinutes) {
@@ -162,16 +150,9 @@ const calcTimeDiff = (start, end) => {
 }
 //1
  const handleTimeDiff = (e) => {
-    // handleInput(prev => ({
-    //     ...prev,
-    //     [e.target.name]: e.target.value,
-    // }));
-    // console.log(startTime, endTime)
-    // console.log(input)
     console.log(startTime.getHours())
     console.log(startTime.getMinutes())
     calcTimeDiff(startTime, endTime)
-    // subtractTime(startTime, endTime)
     console.log('-----')
  }
   return (
