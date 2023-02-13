@@ -18,6 +18,8 @@ function App() {
 
   const [qty, handleQty] = useState(1);
 
+  const [qtyPerHour, handleQtyPerHour] = useState(0);
+
 //   const [input, handleInput] = useState('');
 
   const [message, setMessage] = useState('');
@@ -25,10 +27,8 @@ function App() {
   const [timeMsg, setTimeMsg] = useState('');
 
   const handleChange = event => {
-    // setMessage(event.target.value);
     var num = parseFloat(event.target.value);
-
-    console.log('value is:', num);
+    // console.log('value is:', num);
     
     if(!isNaN(num)){
         if (num < 0){
@@ -48,37 +48,57 @@ const subtractTime = (start, end) => {
     var totalStartMinutes = (startHours * 60) + startMinutes;
     var totalEndMinutes = (endHours * 60) + endMinutes;
     
-    console.log(totalStartMinutes + ' start');
-    console.log(totalEndMinutes + ' end');
+    // console.log(totalStartMinutes + ' start');
+    // console.log(totalEndMinutes + ' end');
+
+
+    setTimeMsg('From ' + startHours + ':' + startMinutes + ' to ' + endHours + ':' + endMinutes)
+    //if statement for extra zero if single digit minute for both
 
     var subtract = 0;
-    //redo if statements for under their time, may have to * by 60 and get difference
+
+    //9 to 9:15
     if(totalStartMinutes < 540 && totalEndMinutes > 555){
-        subtract = subtract - 15;
+        subtract = subtract + 15;
         console.log('subtract 1 15');
     } 
     
+    //11:45 to 12:15
     if(totalStartMinutes < 705 && totalEndMinutes > 735){
-        console.log('subtract 2 15');
-        subtract = subtract - 30;
+        console.log('subtract 2 30');
+        subtract = subtract + 30;
     } 
     
+    //3 to 3:15
     if(totalStartMinutes < 900 && totalEndMinutes > 915){
         console.log('subtract 3 15');
-        subtract = subtract - 15;
+        subtract = subtract + 15;
     }
+
+    
 
     console.log(subtract);
     //if 60 mins, subtract hour
-    if (subtract === (-60)){
+    if (subtract === 60){
         return 1;
     } else {
         return subtract;
     }
-
 }
-//TODO: returns -amount of mins, parameter of time current
+//returns -amount of mins, parameter of time current
+
+//divides qty by hours worked
+const divideByQuantity = (hours, mins) => {
+    var totalHrs = hours + (mins/60);
+    var qtyPerHour = qty / totalHrs;
+    console.log(hours + ' hours!');
+    console.log(qtyPerHour.toFixed(2) + '/hour');
+    handleQtyPerHour(qtyPerHour.toFixed(2));
+}
+//displays time
 const displayTime = (hours, mins) => {
+    //divide here, set qty/hour
+    divideByQuantity(hours, mins);
     var displayHours = hours + ' Hours and ' + mins + ' minutes';
 
     if(hours === 1){
@@ -87,20 +107,20 @@ const displayTime = (hours, mins) => {
     return displayHours;
 }
 
+//calculates hour difference
 const calcHourDiff = (start, end) => {
     var startHours = parseInt(start.getHours());
     var endHours = parseInt(end.getHours());
     var hourDiff = endHours - startHours;
     return hourDiff;
 }
-//2
+//2 calcs time difference, input checking
 const calcTimeDiff = (start, end) => {
     var startMinutes = parseInt(start.getMinutes());
     var endMinutes = parseInt(end.getMinutes());
     var calcMin = 0;
     var hourDiff = calcHourDiff(start, end);
-    console.log(hourDiff + ' hrs');
-
+    
     if(endMinutes < startMinutes){
         calcMin = endMinutes - startMinutes;
         calcMin = 60 + calcMin;
@@ -113,8 +133,31 @@ const calcTimeDiff = (start, end) => {
     } else if (endMinutes >= startMinutes) {
         calcMin = endMinutes - startMinutes;
     }
-    console.log(calcMin + ' mins');
-    setTimeMsg(displayTime(hourDiff, calcMin));
+    console.log(hourDiff + ' hours and ' + calcMin + ' minutes');
+    // setTimeMsg(displayTime(hourDiff, calcMin));
+    //TODO subtract break time
+    var subtract = subtractTime(start, end);
+
+    if (subtract === 1) {
+        //subtract hour from hourdiff
+        hourDiff = hourDiff - 1;
+    } else {
+        //check if mins go negative, subtract hour and add remainder mins
+        if(calcMin < subtract){
+            calcMin = calcMin - subtract;
+            calcMin = 60 + calcMin;
+            hourDiff--;
+            if(hourDiff < 0){
+                console.log('Negative hour.');
+            }
+            console.log(hourDiff + ' hrs-');
+        } else if (calcMin >= subtract) {
+            calcMin = calcMin - subtract;
+        }
+        //divide by quantity in setmessage
+        
+    }
+    setMessage(displayTime(hourDiff, calcMin));
 
 }
 //1
@@ -128,54 +171,9 @@ const calcTimeDiff = (start, end) => {
     console.log(startTime.getHours())
     console.log(startTime.getMinutes())
     calcTimeDiff(startTime, endTime)
-    subtractTime(startTime, endTime)
-
-
-    // setMessage('Yes');
-
-
-//    const totalWorkTime = endTime - startTime;
-//   if (startTime >= (7 * 60 * 60)  ) {
-//       // morning break (between 9am & 9:15)
-//       let morningBreakStartTime = '9:00';
-
-//       let morningBreakEndTime = '9:15';
-
-//       let morningBreak = (morningBreakEndTime - morningBreakStartTime);
-
-//       return morningBreak;
-
-
-//   } else if (startTime >= '9:15' ) {
-//        // lunch break (between 11:45 & 12:15)
-//        let lunchStartTime = '11:45';
-
-//        let lunchEndTime = '12:15';
-
-//        let lunchBreak = (lunchEndTime - lunchStartTime);
-
-//        return lunchBreak;
-
-//   } else if (startTime >= '12:45' ) {
-//       // afternoon break (between 14:45 & 15:00)
-//       let afterNoonBreakStartTime = '14:45';
-
-//       let afterNoonBreakEndTime = '15:00';
-
-//       let afterNoonBreak = (afterNoonBreakEndTime - afterNoonBreakStartTime);
-
-//       console.log(afterNoonBreak)
-//       return afterNoonBreak;
-
-//  } else {
-
-//   // return totalWorkTime;
-//   // let totalWorkTime = (endTime - startTime - afterNoonBreak - lunchBreak - morningBreak);
-
-//   // return totalWorkTime;
-//  }
+    // subtractTime(startTime, endTime)
+    console.log('-----')
  }
-//  console.log(handleTimeDiff)
   return (
     <div>
         <div className='time-card'>
@@ -207,8 +205,10 @@ const calcTimeDiff = (start, end) => {
                             />  
                         </div>
                         <div className='input-group mb-3'>
-                        <label name="qty" id='quantity'>Quantity: </label> <input type="number" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
+                            
+                        <label name="qty" id='quantity'>Quantity: </label> 
                         </div>
+                        <input type="number" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
                     </Form.Label>
                         
                 </Form>
@@ -230,7 +230,7 @@ const calcTimeDiff = (start, end) => {
                             </tr>
                             <tr>
                                 <th>
-                                    <h3>Quantity per Hour: {qty}/hour</h3>
+                                    <h3>Quantity per Hour: {qtyPerHour}/hour</h3>
                                     {/* <h3>Quantity/Hour: {qty}/hour</h3> */}
                                 </th>
                             </tr>
