@@ -45,38 +45,32 @@ const subtractTime = (start, end) => {
     var startMinutes = start.getMinutes();
     var endHours = end.getHours();
     var endMinutes = end.getMinutes();
+    var totalStartMinutes = (startHours * 60) + startMinutes;
+    var totalEndMinutes = (endHours * 60) + endMinutes;
+    
+    console.log(totalStartMinutes + ' start');
+    console.log(totalEndMinutes + ' end');
 
     var subtract = 0;
-    
-    if(startHours < 9){
+    //redo if statements for under their time, may have to * by 60 and get difference
+    if(totalStartMinutes < 540 && totalEndMinutes > 555){
         subtract = subtract - 15;
         console.log('subtract 1 15');
     } 
     
-    if(startHours <= 11 && startMinutes < 45){
+    if(totalStartMinutes < 705 && totalEndMinutes > 735){
         console.log('subtract 2 15');
         subtract = subtract - 30;
     } 
     
-    if(startHours < 15 && startHours > 14){
+    if(totalStartMinutes < 900 && totalEndMinutes > 915){
         console.log('subtract 3 15');
         subtract = subtract - 15;
     }
 
-    if(endHours === 9 && endMinutes < 15){
-        console.log('add 1 15');
-        subtract = subtract + 15;
-    } else if(endHours === 12 && endMinutes < 15){
-        console.log('add 2 15');
-        subtract = subtract + 30;
-    } else if (endHours === 15 && endMinutes < 15){
-        console.log('add 3 15');
-        subtract = subtract + 15;
-    }
-
     console.log(subtract);
     //if 60 mins, subtract hour
-    if (subtract === -60){
+    if (subtract === (-60)){
         return 1;
     } else {
         return subtract;
@@ -236,7 +230,7 @@ const calcTimeDiff = (start, end) => {
                             </tr>
                             <tr>
                                 <th>
-                                    <h3>Quantity: {qty}</h3>
+                                    <h3>Quantity per Hour: {qty}/hour</h3>
                                     {/* <h3>Quantity/Hour: {qty}/hour</h3> */}
                                 </th>
                             </tr>
