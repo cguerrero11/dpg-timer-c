@@ -113,7 +113,6 @@ const calcTimeDiff = (start, end) => {
         calcMin = 60 + calcMin;
         hourDiff--;
         if(hourDiff < 0){
-            //TODO: edit message for invalid time frame
             setMessage('Invalid time frame.');
             return;
         }
@@ -122,8 +121,6 @@ const calcTimeDiff = (start, end) => {
         calcMin = endMinutes - startMinutes;
     }
     console.log(hourDiff + ' hours and ' + calcMin + ' minutes');
-    // setTimeMsg(displayTime(hourDiff, calcMin));
-    //TODO subtract break time
     var subtract = subtractTime(start, end);
 
     if (subtract === 1) {
@@ -143,7 +140,6 @@ const calcTimeDiff = (start, end) => {
             calcMin = calcMin - subtract;
         }
         //divide by quantity in setmessage
-        
     }
     setMessage(displayTime(hourDiff, calcMin));
 
@@ -216,11 +212,11 @@ const calcTimeDiff = (start, end) => {
                                     {/* <h3>Quantity/Hour: {qty}/hour</h3> */}
                                 </th>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <th>
                                     Time: {timeMsg}
                                 </th>
-                            </tr>
+                            </tr> */}
                             </tbody>
                         </table>
                     </div>
