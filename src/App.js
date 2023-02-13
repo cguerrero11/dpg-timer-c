@@ -189,6 +189,7 @@ const calcTimeDiff = (start, end) => {
                             
                         <label name="qty" id='quantity'>Quantity: </label> 
                         </div>
+                        {/* Change type to tel? */}
                         <input type="number" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
                     </Form.Label>
                         
