@@ -1,3 +1,7 @@
+# Calculator for Dakonte Product Group
+
+Make sure to install required node dependancies using npm install
+----
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
