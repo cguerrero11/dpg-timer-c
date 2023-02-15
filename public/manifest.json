@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "DPG Calc",
+  "name": "DPG Calculator",
   "icons": [
     {
       "src": "favicon.ico",
