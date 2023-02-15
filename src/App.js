@@ -20,7 +20,7 @@ function App() {
 
   const [message, setMessage] = useState('');
 
-  const [timeMsg, setTimeMsg] = useState('');
+//   const [timeMsg, setTimeMsg] = useState('');
 
   const handleChange = event => {
     var num = parseFloat(event.target.value);
@@ -43,7 +43,7 @@ const subtractTime = (start, end) => {
     var totalStartMinutes = (startHours * 60) + startMinutes;
     var totalEndMinutes = (endHours * 60) + endMinutes;
 
-    setTimeMsg('From ' + startHours + ':' + startMinutes + ' to ' + endHours + ':' + endMinutes)
+    // setTimeMsg('From ' + startHours + ':' + startMinutes + ' to ' + endHours + ':' + endMinutes)
 
     var subtract = 0;
 
@@ -114,11 +114,17 @@ const calcTimeDiff = (start, end) => {
         hourDiff--;
         if(hourDiff < 0){
             setMessage('Invalid time frame.');
+            handleQty(0);
             return;
         }
         console.log(hourDiff + ' hrs-');
     } else if (endMinutes >= startMinutes) {
         calcMin = endMinutes - startMinutes;
+        if(hourDiff < 0){
+            setMessage('Invalid time frame.');
+            handleQty(0);
+            return;
+        }
     }
     console.log(hourDiff + ' hours and ' + calcMin + ' minutes');
     var subtract = subtractTime(start, end);
