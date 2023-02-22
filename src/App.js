@@ -165,35 +165,34 @@ const calcTimeDiff = (start, end) => {
                 <h2>DPG Time Tracker</h2>
                 <Form>
                     
-                        <div id='startTime' className='input-group mb-3'>
-                        <label name="start-time">Start Time: </label>  <DatePicker
-                                                                                        selected={startTime}
-                                                                                        onChange={(time) => handleStartTime(time)}
-                                                                                        showTimeSelect
-                                                                                        showTimeSelectOnly
-                                                                                        timeIntervals={5}
-                                                                                        name="StartTime"
-                                                                                        dateFormat="h:mm aa"
-                        />   
-                        </div>
-                        <div id='endTime' className='input-group mb-3'>
-                        <label name="end-time">End Time: </label> <DatePicker
-                                                                                        selected={endTime}
-                                                                                        onChange={(time) => handleEndTime(time)}
-                                                                                        showTimeSelect
-                                                                                        showTimeSelectOnly
-                                                                                        timeIntervals={5}
-                                                                                        name="EndTime"
-                                                                                        dateFormat="h:mm aa"
-                            />  
-                        </div>
-                        <div className='input-group mb-3'>
-                            
-                        <label name="qty" id='quantity'>Quantity: </label> 
-                        </div>
-                        <input type="tel" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
-                    <p></p>
+                    <div id='startTime' className='input-group mb-3'>
+                    <label name="start-time">Start Time: </label>  <DatePicker
+                                                                                    selected={startTime}
+                                                                                    onChange={(time) => handleStartTime(time)}
+                                                                                    showTimeSelect
+                                                                                    showTimeSelectOnly
+                                                                                    timeIntervals={5}
+                                                                                    name="StartTime"
+                                                                                    dateFormat="h:mm aa"
+                    />   
+                    </div>
+                    <div id='endTime' className='input-group mb-3'>
+                    <label name="end-time">End Time: </label> <DatePicker
+                                                                                    selected={endTime}
+                                                                                    onChange={(time) => handleEndTime(time)}
+                                                                                    showTimeSelect
+                                                                                    showTimeSelectOnly
+                                                                                    timeIntervals={5}
+                                                                                    name="EndTime"
+                                                                                    dateFormat="h:mm aa"
+                        />  
+                    </div>
+                    <div className='input-group mb-3'>
                         
+                    <label name="qty" id='quantity'>Quantity: </label> 
+                    </div>
+                    <input type="tel" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
+                    <p></p>
                 </Form>
                 <Button className='w-100' onClick={handleTimeDiff}>Submit</Button>
 
