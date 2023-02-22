@@ -112,7 +112,7 @@ const calcTimeDiff = (start, end) => {
         calcMin = endMinutes - startMinutes;
         calcMin = 60 + calcMin;
         hourDiff--;
-        if(hourDiff < 0){
+        if(hourDiff < 0 || (hourDiff <= 0 && calcMin === 0)){
             setMessage('Invalid time frame.');
             handleQty(0);
             return;
@@ -120,7 +120,7 @@ const calcTimeDiff = (start, end) => {
         console.log(hourDiff + ' hrs-');
     } else if (endMinutes >= startMinutes) {
         calcMin = endMinutes - startMinutes;
-        if(hourDiff < 0){
+        if(hourDiff < 0 || (hourDiff <= 0 && calcMin === 0)){
             setMessage('Invalid time frame.');
             handleQty(0);
             return;
@@ -164,25 +164,25 @@ const calcTimeDiff = (start, end) => {
             <Card.Body>
                 <h2>DPG Time Tracker</h2>
                 <Form>
-                    <Form.Label>
-                        <div className='input-group mb-3'>
-                        <label name="start-time" id='startTime' >Start Time: </label>  <DatePicker
+                    
+                        <div id='startTime' className='input-group mb-3'>
+                        <label name="start-time">Start Time: </label>  <DatePicker
                                                                                         selected={startTime}
                                                                                         onChange={(time) => handleStartTime(time)}
                                                                                         showTimeSelect
                                                                                         showTimeSelectOnly
-                                                                                        timeIntervals={15}
+                                                                                        timeIntervals={5}
                                                                                         name="StartTime"
                                                                                         dateFormat="h:mm aa"
                         />   
                         </div>
-                        <div className='input-group mb-3'>
-                        <label name="end-time" id='endTime'>End Time: </label> <DatePicker
+                        <div id='endTime' className='input-group mb-3'>
+                        <label name="end-time">End Time: </label> <DatePicker
                                                                                         selected={endTime}
                                                                                         onChange={(time) => handleEndTime(time)}
                                                                                         showTimeSelect
                                                                                         showTimeSelectOnly
-                                                                                        timeIntervals={15}
+                                                                                        timeIntervals={5}
                                                                                         name="EndTime"
                                                                                         dateFormat="h:mm aa"
                             />  
@@ -192,7 +192,7 @@ const calcTimeDiff = (start, end) => {
                         <label name="qty" id='quantity'>Quantity: </label> 
                         </div>
                         <input type="tel" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
-                    </Form.Label>
+                    <p></p>
                         
                 </Form>
                 <Button className='w-100' onClick={handleTimeDiff}>Submit</Button>
@@ -208,7 +208,7 @@ const calcTimeDiff = (start, end) => {
                             <tbody>
                             <tr>
                                 <th>
-                                    <h3>Calucated hours: {message}</h3>
+                                    <h3>Calculated hours: {message}</h3>
                                 </th>
                             </tr>
                             <tr>
