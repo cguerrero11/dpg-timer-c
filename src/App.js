@@ -174,9 +174,11 @@ const calcTimeDiff = (start, end) => {
                                                                                     timeIntervals={5}
                                                                                     name="StartTime"
                                                                                     dateFormat="h:mm aa"
+                                                                                    wrapperClassName="form-control"
+                                                                                    class="datepicker"
                     />   
-                    </div>
-                    <div id='endTime' className='input-group mb-3'>
+                    {/* </div>
+                    <div id='endTime' className='input-group mb-3'> */}
                     <label name="end-time">End Time: </label> <DatePicker
                                                                                     selected={endTime}
                                                                                     onChange={(time) => handleEndTime(time)}
@@ -185,6 +187,8 @@ const calcTimeDiff = (start, end) => {
                                                                                     timeIntervals={5}
                                                                                     name="EndTime"
                                                                                     dateFormat="h:mm aa"
+                                                                                    wrapperClassName="form-control"
+                                                                                    class="datepicker"
                         />  
                     </div>
                     <div className='input-group mb-3'>

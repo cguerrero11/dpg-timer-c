@@ -11,3 +11,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ #startTime {
+  display: flex; 
+  margin: 0px;
+  max-width: 600px;
+}
+/*
+#endTime {
+  float:left;
+}
+*/
+/* .form-control {
+  max-width: 100px; 
+  float: left;
+  margin-right: 10px;
+  display: none;
+  }  */
+
+  /* .react-datepicker-ignore-onclickoutside {
+    width: 100px;
+  } */
+
+  .datepicker {
+    display: none;
+    }
+
+    label{
+      margin-top: 10px;
+    }
+
+@media (max-width: 600px) {
+  #startTime {
+    display: flex; 
+    margin: 0px;
+    max-width: 100%;
+  }
+  input {
+    width: 75px;
+  }
+}
