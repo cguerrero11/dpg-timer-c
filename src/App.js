@@ -81,7 +81,7 @@ const divideByQuantity = (hours, mins) => {
     var qtyPerHour = qty / totalHrs;
     console.log(hours + ' hours!');
     console.log(qtyPerHour.toFixed(2) + '/hour');
-    handleQtyPerHour(qtyPerHour.toFixed(2));
+    handleQtyPerHour(Math.floor(qtyPerHour));
 }
 //displays time
 const displayTime = (hours, mins) => {
@@ -114,6 +114,7 @@ const calcTimeDiff = (start, end) => {
         hourDiff--;
         if(hourDiff < 0){
             setMessage('Invalid time frame.');
+            handleQty(0);
             return;
         }
         console.log(hourDiff + ' hrs-');
@@ -185,8 +186,7 @@ const calcTimeDiff = (start, end) => {
                             
                         <label name="qty" id='quantity'>Quantity: </label> 
                         </div>
-                        {/* Change type to tel? */}
-                        <input type="number" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
+                        <input type="tel" id='qty' name='qty' onChange={(e) => handleChange(e)}/> 
                     </Form.Label>
                         
                 </Form>
