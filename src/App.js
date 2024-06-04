@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import { Card, Form, Button, Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from './DPGlogo.png';
 import './App.css';
 
 function App() {
@@ -156,6 +157,7 @@ const calcTimeDiff = (start, end) => {
     <div>
         <div className='time-card'>
             <Card>
+                <p><img src={logo} height={110}></img></p>
             <Card.Body>
                 <h2>DPG Time Tracker</h2>
                 <Form>
